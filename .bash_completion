@@ -3,3 +3,10 @@ if [ -e "/usr/share/bash-completion/completions/pass" ]; then
 	. "/usr/share/bash-completion/completions/pass"
 	complete -o filenames -F _pass mypass
 fi
+
+# Use git for dotfiles etc. See .bashrc for details
+if [ -e "/usr/share/bash-completion/completions/git" ]; then
+	. "/usr/share/bash-completion/completions/git"
+	__git_complete config __git_main
+
+fi
