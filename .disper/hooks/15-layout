@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# Use external screen as primary if connected, and put it on the left side of
+# the built-in screen
+
+xrandr --output eDP1 --auto
+xrandr --output DP1-2 --auto
+xrandr --output HDMI2 --auto
+if xrandr --query|grep -q '^DP1-2 connected'; then
+	#xrandr --output DP1-2 --off
+	xrandr --output DP1-2 --primary --auto --left-of eDP1
+	xrandr --output eDP1 --auto --rotate inverted
+	if xrandr --query|grep -q '^HDMI2 connected'; then
+		xrandr --output HDMI2 --rotate left --left-of DP1-2 --auto
+	else
+		xrandr --output HDMI2 --rotate normal --off
+	fi
+else
+	xrandr --output eDP1 --primary --output DP1-2 --off
+	if xrandr --query|grep -q '^HDMI2 connected'; then
+		xrandr --output HDMI2 --left-of eDP1 --auto
+	else
+		xrandr --output HDMI2 --rotate normal --off
+	fi
+fi

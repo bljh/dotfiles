@@ -1,0 +1,36 @@
+#!/bin/bash
+type xsetwacom >/dev/null 2>&1 || exit
+primary="$(xrandr|awk '$3=="primary" {print $1}')"
+screenres=( $(xrandr|sed -n 's/.* current \([0-9]\+\) x \([0-9]\+\).*/\1 \2/p') )
+
+xsetwacom --set "Wacom Intuos PT S 2 Finger touch" Rotate none
+xsetwacom --set "Wacom Intuos PT S 2 Pen stylus" Rotate none
+
+xsetwacom --set "Wacom Intuos PT S 2 Pad pad" Gesture on
+xsetwacom --set "Wacom Intuos PT S 2 Pen stylus" Gesture on
+xsetwacom --set "Wacom Intuos PT S 2 Finger touch" Gesture on
+
+# Buttons as mouse wheel
+xsetwacom --set "Wacom Intuos PT S 2 Pad pad" Button 1 "button 5"
+xsetwacom --set "Wacom Intuos PT S 2 Pad pad" Button 9 "button 5"
+xsetwacom --set "Wacom Intuos PT S 2 Pad pad" Button 8 "button 4"
+
+# Handled by xbindkeys
+xsetwacom --set "Wacom Intuos PT S 2 Pad pad" Button 3 "key F12"
+
+xsetwacom set "Wacom Intuos PT S 2 Finger touch" ZoomDistance 18
+xsetwacom set "Wacom Intuos PT S 2 Finger touch" ScrollDistance 18
+xsetwacom set "Wacom Intuos PT S 2 Finger touch" TapTime 120
+
+xsetwacom --set "Wacom Intuos PT S 2 Pen stylus" Threshold 200
+xsetwacom --set "Wacom Intuos PT S 2 Pen stylus" RawSample 10
+
+xsetwacom --set "Wacom Intuos PT S 2 Pen stylus" TabletPCButton on
+xsetwacom --set "Wacom Intuos PT S 2 Pen stylus" Button 1 "button +1"
+xsetwacom --set "Wacom Intuos PT S 2 Pen stylus" Button 2 "button +2"
+xsetwacom --set "Wacom Intuos PT S 2 Pen stylus" Button 3 "button +3"
+#xsetwacom --set "Wacom Intuos PT S 2 Pen stylus" Button 3 "key F12" # Handled by xbindkeys
+
+~/bin/wacom-aspect "$primary" "Wacom Intuos PT S 2 Pen stylus"
+
+exit 0

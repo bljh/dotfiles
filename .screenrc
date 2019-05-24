@@ -1,0 +1,62 @@
+# ~/.screenrc
+# My configuration for GNU/screen
+#
+
+# UTF-8 is neat
+defutf8 on
+utf8 on on
+# Yeah, yeah, I've read it a thousand times already
+startup_message off
+# My computer has more memory than my brain, might as well use it
+defscrollback 1000
+
+# The shell should be started as a "login" shell
+#shell -$SHELL
+shell -/bin/bash
+
+# Attention grabbers
+activity "Activity in window %n"
+bell_msg "Ding-a-ling in window %n!^G"
+
+# Use audible bell
+vbell off
+
+# Attempt to function better on unstable ssh connections
+nonblock on
+
+# Lock screen after 12 minutes of inactivity
+#idle 720 lockscreen
+
+# Let C-g abort C-a, instead of toggling vbell
+bind ^g echo "Aborted"
+
+# Use shift-up and shift-down for scrolling. Requires changes to .Xresources if
+# you use xterm or something similar. Info:
+# http://aperiodic.net/screen/interface#xterm-style_scrolling
+bindkey "^[[5;2~" eval "copy" "stuff ^u"
+bindkey -m "^[[5;2~" stuff ^u
+bindkey -m "^[[6;2~" stuff ^d
+
+
+# Some "backticks" to show me useful information in the caption bar at the
+# bottom of my screen.
+#
+# These will obviously require external scripts. If they are not present, env
+# and the redirections will make sure not to cause undesired terminal noise.
+# battime.sh should output battery time left, if applicable
+backtick 1 30 30 sh -c "acpi -b|grep -v '100%$'|cut -d: -f2-|cut -d, -f 2,3|cut -d' ' -f2-"
+#backtick 2 30 30 env netqueue-count -q 2>/dev/null
+# Caption example (current window will be bold): (Grey text on blue background,
+# current window is bold and white) (In split screen, the inactive part will
+# have black foreground)
+# [11:44:08] 0-$ mutt  1$* irssi  2$ slrn       [batt: 02:05] hostname
+#caption always "%?%F%{= bw}%:%{= bk}%?[%c:%s] %-Lw%{+b}%10L>%n%f* %t%{-b}%+Lw%=%? %{= rk}[net-Q: %2`]%{= bw}%?%? [batt: %1`]%?%H%{dd}"
+caption always "%?%F%{= bw}%:%{= bk}%?[%c:%s] %-Lw%{+b}%10L>%n%f* %t%{-b}%+Lw%=%? [batt: %1`]%?%H%{dd}"
+
+# Standout rendition, including vertical bar, is bold green on black background
+rendition so "=b kg"
+
+# A "screen scraper" that shows you a list of all urls on the screen, and
+# allows you to quickly open it in your browser. I've tried to make it fairly
+# secure, but it is still vulnerable to symlink attacks
+bind ^B eval "hardcopy_append off" "hardcopy /tmp/.screen-urlview-$USER" "screen -t urlview sh -c 'chmod 600 /tmp/.screen-urlview-$USER; urlview /tmp/.screen-urlview-$USER; rm -f /tmp/.screen-urlview-$USER'"

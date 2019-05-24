@@ -1,0 +1,15 @@
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = https://github.com/vim-syntastic/syntastic.git
+[submodule ".vim/bundle/vim-arduino-syntax"]
+	path = .vim/bundle/vim-arduino-syntax
+	url = https://github.com/sudar/vim-arduino-syntax
+[submodule ".vim/bundle/vim-colors-solarized"]
+	path = .vim/bundle/vim-colors-solarized
+	url = git://github.com/altercation/vim-colors-solarized.git
+[submodule ".vim/bundle/vim-jinja"]
+	path = .vim/bundle/vim-jinja
+	url = https://github.com/lepture/vim-jinja.git
+[submodule ".vim/bundle/vim-openscad"]
+	path = .vim/bundle/vim-openscad
+	url = https://github.com/sirtaj/vim-openscad.git

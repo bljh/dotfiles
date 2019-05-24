@@ -1,0 +1,129 @@
+###########################
+# xbindkeys configuration #
+###########################
+
+
+##### Emulate some Windows behaviour
+## Use Alt + Tab to toggle windows
+#"ratpoison -c next"
+#	Alt + Tab
+#"ratpoison -c prev"
+#	Alt + Shift + Tab
+## .. and Windows + Tab to toggle frames/screens
+#"ratpoison -c nextscreen"
+#	Mod4 + Tab
+#"ratpoison -c prevscreen"
+#	Mod4 + Shift + Tab
+## Swap screen contents (in Windows 7 it means move window one screen to the left/right)
+#"ratpoison -c sdump|sed 's/,/\n/'|sed -n 's/^\([0-9]\+\) .* 0$/swap \1/p'|xargs -0r ratpoison -c"
+#	Mod4 + Shift + Left
+#"ratpoison -c sdump|sed 's/,/\n/'|sed -n 's/^\([0-9]\+\) .* 0$/swap \1/p'|xargs -0r ratpoison -c"
+#	Mod4 + Shift + Right
+## Windows + arrow down = hide window (in Windows it means minimize)
+#"ratpoison -c 'select -'"
+#	Mod4 + Down
+## Windows + arrow up = show window (in Windows it means maximize)
+#"ratpoison -c 'other'"
+#	Mod4 + Up
+## Windows+D = Toggle between showing the wallpaper and the last active window
+#"ratpoison -c windows|grep -q '^.\*' && ratpoison -c 'select -' || ratpoison -c 'other'"
+#	Mod4 + D
+# Windows+P = Activate any connected external monitors with multihead (Activates projector switch dialog in Windows 7)
+"mydisper"
+	Mod4 + p
+
+# An experiment to rotate the screen with the Windows key, but only while in tablet mode (detected by the disabled touchpad)
+#"xinput list-props 'SynPS/2 Synaptics TouchPad'|sed -n 's/\s*Device Enabled (134):\s*\([0-1]\)$/\1/p'|grep -q 0 && $HOME/bin/yoga-rotate.sh ccw"
+#"$HOME/bin/yoga-rotate.sh ccw"
+#	Super_L
+######
+
+# Windows + Shift + S = suspend system
+"systemctl suspend"
+	Mod4 + Shift + S
+
+# xsetwacom is set to fire F12 on one of the tablet buttons. This is mapped
+# here to MapToOutput next, to rotate the mapping among screens and finally the
+# whole desktop
+"xsetwacom --set 'Wacom Intuos PT S 2 Pen stylus' MapToOutput next"
+	F12
+
+# Switch between windows with the Windows key alone, but only in non-rotated mode. If this seems to override Windows+Any combinations, try pressing Any first, then Window
+#"if [ `$HOME/bin/yoga-rotate.sh status` != 'normal' ]; then ratpoison -c next; fi"
+#	Super_L
+
+# Easy rotation of the screen
+#"$HOME/bin/yoga-rotate.sh normal"
+#	Mod4 + Control + Up
+#"$HOME/bin/yoga-rotate.sh inverted"
+#	Mod4 + Control + Down
+#"$HOME/bin/yoga-rotate.sh left"
+#	Mod4 + Control + Left
+#"$HOME/bin/yoga-rotate.sh right"
+#	Mod4 + Control + Right
+
+# Pause = Activate screensaver/locker. Also clear various keys
+"set -x; ssh-add -D; killall -q -SIGHUP gpg-agent; rm -vrf "$HOME/.ssh/controlmasters/"*; xset s activate"
+	Pause
+## Same with Win+l, to emulate Windows behavior
+#"set -x; ssh-add -D; killall -q -SIGHUP gpg-agent; rm -vrf "$HOME/.ssh/controlmasters/"*; xset s activate"
+#	Mod4 + l
+# Lenovo Thinkpad Yoga has a lock button that generates a Mod4 + o event
+"set -x; ssh-add -D; killall -q -SIGHUP gpg-agent; rm -vrf "$HOME/.ssh/controlmasters/"*; xset s activate"
+	Mod4 + o
+# This is for the lock button on the side of the Lenovo Thinkpad Yoga
+#"ssh-add -D; killall -q -SIGHUP gpg-agent; sleep 1; xset s activate"
+#	0xffeb + Super_L
+
+# Controls for keyboards with hotkeys, including certain Apple keyboards
+# PCM for docking station, Master for internal
+"pgrep -x amixer || amixer -q sset Master 5%-; aplay -q ~/.xkb/glasstick.wav"
+	XF86AudioLowerVolume
+"pgrep -x amixer || amixer -q sset Master 5%+; aplay -q ~/.xkb/glasstick.wav"
+	XF86AudioRaiseVolume
+"pgrep -x amixer || amixer -q sset PCM Togge; amixer -q sset Master toggle; aplay -q ~/.xkb/glasstick.wav"
+	XF86AudioMute
+# Capture Switch is available on Lenovo Thinkpad Yoga. Not sure how generic this setup is
+"amixer cset "$(amixer controls|sed -n "s/^\(numid=[0-9]\+\)\,iface=[a-zA-Z0-9]\+\,name='Capture Switch'$/\1/p")" toggle"
+	XF86AudioMicMute
+
+"mpc -q prev"
+	XF86AudioPrev
+"mpc -q next"
+	XF86AudioNext
+# Toggle play/pause (or play/stop if playing an http stream)
+"mpc -f '%file%' current|grep -q '^https\?://' && mpc -q stop ||  mpc -q toggle"
+	XF86AudioPlay
+"mpc -q stop"
+	XF86AudioStop
+# Alternatives for machines without media hotkeys
+"mpc -q prev"
+	XF86Tools
+"mpc -q next"
+	XF86Search
+"mpc -f '%file%' current|grep -q '^https\?://' && mpc -q stop ||  mpc -q toggle"
+	XF86LaunchA
+
+# Backlight control
+"xbacklight -time 50 -steps 5 -inc 2"
+	XF86MonBrightnessUp
+"xbacklight -time 50 -steps 5 -dec 2"
+	XF86MonBrightnessDown
+
+### HAM rig control. For K3 and KX3, first run:
+# rigctld -r /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A9015XNW-if00-port0 -m229
+# Back button on mouse: m:0x0 + b:8
+#"echo T0|rigctl -m2 &"
+#	m:0x0 + b:8 + Release
+#"echo T1|rigctl -m2 &"
+#	m:0x0 + b:8
+# Directly
+# m:0x0 + b:8 = mouse back button
+"echo 'RX;' >> /dev/radio/kx3"
+	m:0x0 + b:8 + Release
+"stty -F /dev/radio/kx3 38400; echo 'TX;' >> /dev/radio/kx3"
+	m:0x0 + b:8
+
+##################################
+# End of xbindkeys configuration #
+##################################

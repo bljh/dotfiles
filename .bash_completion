@@ -1,0 +1,5 @@
+# Let ~/bin/mypass behave as pass
+if [ -e "/usr/share/bash-completion/completions/pass" ]; then
+	. "/usr/share/bash-completion/completions/pass"
+	complete -o filenames -F _pass mypass
+fi

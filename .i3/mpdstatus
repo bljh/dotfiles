@@ -1,0 +1,85 @@
+#!/usr/bin/env perl
+# vim:ts=4:sw=4:expandtab
+# © 2012 Michael Stapelberg, Public Domain
+# © 2016 Jesper Henriksen, Public Domain
+
+# This script is a simple wrapper which prefixes each i3status line with the
+# status of mpd, as seen by mpc.
+#
+# To use it, ensure your ~/.i3status.conf contains this line:
+#     output_format = "i3bar"
+# in the 'general' section.
+# Then, in your ~/.i3/config, use:
+#     status_command i3status | ~/mpdstatus
+# In the 'bar' section.
+
+use strict;
+use warnings;
+# You can install the JSON module with 'cpan JSON' or by using your
+# distribution’s package management system, for example apt-get install
+# libjson-perl on Debian/Ubuntu.
+use JSON;
+
+use utf8;
+
+# Don’t buffer any output.
+$| = 1;
+
+# Skip the first line which contains the version header.
+print scalar <STDIN>;
+
+# The second line contains the start of the infinite array.
+print scalar <STDIN>;
+
+# Read lines forever, ignore a comma at the beginning if it exists.
+while (my ($statusline) = (<STDIN> =~ /^,?(.*)/)) {
+    # Decode the JSON-encoded line.
+    my @blocks = @{decode_json($statusline)};
+
+	my $song = `mpc -f '[%artist%: ]%title%' current`;
+	# Trim leading and trailing whitespaces and line breaks
+	$song=~ s/^\s+//;
+	$song=~ s/\s+$//;
+    # Prefix our own information (you could also suffix or insert in the
+    # middle).
+	if($song) {
+		@blocks = ({
+			color => "#00FF00",
+			full_text => "MPD: $song",
+			name => 'mpd'
+		}, @blocks);
+	}
+
+	if(open(FILE,'<',$ENV{"HOME"}."/.workrave/todaystats")) {
+		my $workrave = 0;
+		my $workravelimit = 3600*4;
+		my $workravewarning = $workravelimit*0.8;
+		while(!$workrave && <FILE>) {
+			my @fields = split(' ',<FILE>);
+			if($fields[0]=~/m$/ && int($fields[1]==6) && int($fields[2])>0) {
+				$workrave=int($fields[2]);
+			}
+		}
+		close FILE;
+		if($workrave>0) {
+			my $color="#FFFFFF";
+			if($workrave < $workravewarning) {
+				$color="#00FF00";
+			}
+			elsif($workrave < $workravelimit && $workrave>=$workravewarning) {
+				$color="#FFFF00";
+			}
+			elsif ($workrave >= $workravelimit) {
+				$color="#FF0000";
+			}
+			@blocks = ({
+				color => $color,
+				full_text => sprintf("Workrave %02d:%02d:%02d",$workrave/3600,$workrave%3600/60%60,$workrave%60),
+				name => 'workrave'
+			}, @blocks);
+		}
+	}
+
+    # Output the line as JSON.
+    print encode_json(\@blocks) . ",\n";
+}

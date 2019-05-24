@@ -1,0 +1,4 @@
+#!/bin/sh
+[ -d "${HOME}/.backgrounds" ] || exit 0
+type feh >/dev/null 2>&1 || exit 0
+exec feh --auto-zoom --image-bg black --bg-fill --randomize --recursive "${HOME}/.backgrounds/"

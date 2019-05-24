@@ -1,0 +1,20 @@
+#!/bin/sh
+# If any of these conditions are true, we are likely at the work desk, and the
+# laptop is likely in tent mode. If so, the screen should be rotated to match
+# the physical orientation
+
+docked=""
+
+if xinput|grep -q 'Cooler Master Technology'; then
+	docked=y
+elif xinput|grep -q 'Apple Keyboard'; then
+	docked=y
+fi
+
+
+if [ "$docked" = "y" ]; then
+	xrandr --output eDP1 --rotate inverted 
+	xbacklight -set 70 || true
+else
+	xrandr --output eDP1 --rotate normal
+fi

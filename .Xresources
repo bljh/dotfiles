@@ -1,0 +1,138 @@
+! Various terminal settings {{{
+! https://unix.stackexchange.com/questions/81746/how-can-i-get-better-looking-fonts-in-my-terminal-urxvt
+!URxvt.font:     xft:bitstream vera sans mono:size=8:antialias=true
+!URxvt.boldFont: xft:bitstream vera sans mono:bold:size=8:antialias=true
+!URxvt.font:     xft:DejaVu Sans Mono:size=12:antialias=true
+!URxvt.boldFont: xft:DejaVu Sans Mono:bold:size=12:antialias=true
+URxvt.font:     xft:Hack:regular:size=10:antialias=true
+URxvt.boldFont: xft:Hack:bold:size=10:antialias=true
+urxvt.foreground: green
+*VT100.foreground: green
+urxvt.background: black
+*VT100.background: black
+urxvt.transparent: true
+urxvt.shading: 8
+urxvt.blurRadius: 0
+urxvt.loginShell: true
+*VT100.loginShell: true
+urxvt.scrollBar: false
+*VT100.scrollBar: false
+urxvt.colorMode: on
+*VT100.colorMode: on
+urxvt.boldColors: on
+*VT100.boldColors: on
+urxvt.dynamicColors: on
+*VT100.dynamicColors: on
+urxvt.colorAttrMode: on
+*VT100.colorAttrMode: on
+URxvt.urgentOnBell: true
+*VT100.urgentOnBell: true
+XTerm*bellIsUrgent:  true
+! }}}
+! HiDPI and font related settings {{{
+! http://vincent.jousse.org/tech/archlinux-retina-hidpi-macbookpro-xmonad/
+! https://wiki.archlinux.org/index.php/HiDPI#X_Server
+Xft.antialias: true
+Xft.rgba:      rgb
+Xft.hinting:   true
+!Xft.autohint:  0
+!Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.dpi:       96
+!Xft.dpi:       120
+!Xft.dpi:       144
+!Xft.dpi:       175
+!Xft.dpi:       168
+!Xft.dpi:       192
+! }}}
+! I normally expect the Alt+anything combination to behave like
+! escape->anything. On some machines thats not the case. This fixes it.
+XTerm.vt100.metaSendsEscape: true
+! More info found in urxvt(1)
+! Black
+urxvt.color0: black
+*VT100.color0: black
+! Red
+urxvt.color1: red3
+*VT100.color1: red3
+! Green
+urxvt.color2: green3
+*VT100.color2: green3
+! Yellow
+urxvt.color3: yellow3
+*VT100.color3: yellow3
+!!Blue
+urxvt.color4: rgb:4c/4c/ff
+*VT100.color4: rgb:4c/4c/ff
+! Magenta
+urxvt.color5: magenta3
+*VT100.color5: magenta3
+! Cyan
+urxvt.color6: cyan3
+*VT100.color6: cyan3
+! White
+urxvt.color7: gray90
+*VT100.color7: gray90
+! Bright black?
+urxvt.color8: gray50
+*VT100.color8: gray50
+! Bright red
+urxvt.color9: red
+*VT100.color9: red
+! Bright green
+urxvt.color10: green
+*VT100.color10: green
+! Bright yellow
+urxvt.color11: yellow
+*VT100.color11: yellow
+! Bright blue
+urxvt.color12: rgb:5c/5c/ff
+*VT100.color12: rgb:5c/5c/ff
+! Bright magenta
+urxvt.color13: magenta
+*VT100.color13: magenta
+! Bright cyan
+urxvt.color14: cyan
+*VT100.color14: cyan
+! Bright white
+urxvt.color15: white
+*VT100.color15: white
+
+! Disable shift-up and shift-down for scrolling, to allow GNU screen to do it
+! instead. Info: http://aperiodic.net/screen/interface#xterm-style_scrolling
+*.vt100.translations: #override \n\
+    Shift <Key>Prior:string(0x1b) string("[5;2~") \n\
+    Shift <Key>Next:string(0x1b) string("[6;2~")
+
+xpdf.:90
+initialZoom: width
+
+*inputMethod: kinput2
+
+! Sometimes, with my auto-ssh-askpass.sh, ssh-askpass will seemingly grab the
+! keyboard before xscreensaver, causing the contents of the screen to be
+! revealed to on-lookers. This hopefully fixes the problem:
+SshAskpass*grabKeyboard: False
+
+! Attenpt to disable the mouse while locked. Some bug reports mention that the
+! max is 100px
+xscreensaver.pointerHysteresis: 2000
+
+! ratmenu
+! Look in /etc/X11/rgb.txt for supported color names
+ratmenu*fgcolor:  white
+ratmenu*bgcolor:  black
+! Look in /etc/X11/fonts/*/*.alias for possible fonts */
+!ratmenu*font:     -dosemu-vga-medium-r-normal--20-200-75-75-c-100-ibm-cp866
+!ratmenu*font:     vga
+! Possible values: snazzy, dreary
+ratmenu*style:    dreary
+! Possible values: true, false
+!ratmenu*persist:  false
+! Possible values: left, center, right
+!ratmenu*align:    right
+
+! xvkbd - Virtual on-screen keyboard for touch screens etc
+xvkbd.keypad: false
+xvkbd.customization: -norwegian
+xvkbd.compact: true
