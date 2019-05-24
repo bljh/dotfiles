@@ -71,9 +71,11 @@ fi
 alias netstat='netstat --wide'
 alias ip='ip -human -color -oneline -brief'
 
-# Use git for config files
-#git init --bare "$HOME/.configrepo"
-#config config --local status.showUntrackedFiles no
+# Use git for config files. To apply to a new system:
+# alias config='/usr/bin/git --git-dir=$HOME/.configrepo/ --work-tree=$HOME'
+# config config --local status.showUntrackedFiles no
+# git clone --bare <git-repo-url> $HOME/.configrepo
+# config checkout
 alias config='/usr/bin/git --git-dir=$HOME/.configrepo/ --work-tree=$HOME'
 
 if cmdexists lynx; then
