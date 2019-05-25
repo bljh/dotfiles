@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Set keyboard options
 # (more options: http://gentoo-wiki.com/HOWTO_X11_Keyboard )
 # I primarily want Norwegian layout with no dead keys. In addition, caps lock
@@ -15,10 +15,11 @@ xset r rate 200 35
 
 # Use xkbevd to generate audible bell
 # http://www.gentoo-wiki.info/HOWTO_Virtual_PC_Speaker
+pkill -U "$UID" xkbevd
 xkbevd -bg
 
-# Xbindkeys, obviously :)
 if type xbindkeys >/dev/null 2>&1 && [ -f ~/.xbindkeysrc ]; then
+	pkill -U "$UID" xbindkeys
 	xbindkeys
 fi
 
