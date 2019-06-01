@@ -1,0 +1,31 @@
+#!/bin/bash
+# Wrapper for pass (https://www.passwordstore.org/). Copies the first line
+# (password) to clipboard, opens urls (prefixed "url: ") in default browser,
+# and displas yanything other than the password (username etc)
+
+set -e
+set -u
+
+if [ $# -eq 1 ] && [ -e "${PASSWORD_STORE_DIR:-"$HOME/.password-store"}/$1.gpg" ]; then
+	mapfile -t lines < <(pass "${@}")
+	before="$(xclip -o -selection 2>/dev/null | base64)"
+	 # Prepare to copy the password to clipboard, without showing it
+	secret="${lines[0]}"
+	unset lines[0]
+	for line in "${lines[@]}"; do
+		echo "$line"
+		# Open lines that start with "url: " in the default web browser
+		if [ "${line:0:5}" = "url: " ]; then
+			sensible-browser "${line:5}" &
+		fi
+	done
+	# Restore previous clipboard when we're done
+	trap 'xclip < <(base64 -d <<< "$before")' EXIT
+	xclip <<< "$secret"
+	echo ""
+	read -n1 -p "Password clipped. Press any key to reset"
+	echo ""
+else
+	# If any arguments were provided, hand over control to pass
+	exec pass "${@}"
+fi

@@ -1,0 +1,76 @@
+#!/bin/sh
+# A script to ease upgrading of my systems
+
+set -e
+
+# A quick function to check if a command exists
+cmdexists()
+{
+	type "${@}" 1>/dev/null 2>&1
+}
+
+set -x
+
+# Privilege escalation if we're not root
+if [ "$(id -u)" != "0" ]; then
+	if cmdexists sudo; then
+		exec sudo "$0" "${@}"
+	else
+		echo "Upgrading the system requires root. Tried sudo, but that does not exist here" >&2
+		exit 2
+	fi
+fi
+
+update=y
+while [ $# -gt 0 ]; do
+	case "$1" in
+		--no-update)
+			update=n;;
+		--update)
+			update=y;;
+		*)
+			echo "Unrecgonized option: $1"
+			exit 3
+		;;
+	esac
+	shift
+done
+
+if cmdexists aptitude; then
+	aptitude_opts="-W"
+	# If cron-apt exists we assume that update is already performed on a
+	# regular basis
+	if [ "$update" = "y" ] && ! cmdexists cron-apt; then
+		aptitude update
+	fi
+	#aptitude $aptitude_opts autoclean
+	aptitude $aptitude_opts safe-upgrade
+	#aptitude $aptitude_opts full-upgrade # Deprecated except when upgrading between distro releases
+	aptitude $aptitude_opts purge '?config-files'
+	# Purge obsolete packages except whatever kernel we're running, and a
+	# number of whitelisted packages. Grep ensures that nobody can run
+	# arbitrary code by putting it in the kernel revision
+	aptitude $aptitude_opts purge '?and(?obsolete,!?name(linux-image-'"$(uname -r|grep -o '^[A-Za-z0-9.-]\+$')"'))'
+	dpkg --configure -a
+	aptitude $aptitude_opts clean
+elif cmdexists apt-get; then
+	# If cron-apt exists we assume that update is already performed on a
+	# regular basis
+	if [ "$update" = "y" ] && ! cmdexists cron-apt; then
+		apt-get update
+	fi
+	#apt-get autoclean
+	apt-get upgrade
+	dpkg --configure -a
+	#apt-get dist-upgrade # Deprecated except when upgrading between distro releases
+	apt-get autoremove
+	# Purge config-files (sed finds removed packages with config files (^rc) and spits out the package name)
+	dpkg -l|sed -n 's/^rc\s\+\([A-Za-z0-9.-]\+\)\s\+.*/\1/p'|xargs -r dpkg --purge
+	# Another way to do it:
+	#dpkg-query -f '${Package} ${Status}\n' -W|grep config-files|cut -d' ' -f1
+	# FIXME: Purge obsolete
+	apt-get clean
+else
+	echo "Cannot find aptitude or apt-get on this system." >&2
+	exit 1
+fi

@@ -1,0 +1,4 @@
+#!/bin/sh
+if [ -d ~/.disper/hooks/ ]; then
+	run-parts ~/.disper/hooks/
+fi
