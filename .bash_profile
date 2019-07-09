@@ -26,6 +26,22 @@ cmdexists()
 	type "${@}" 1>/dev/null 2>&1
 }
 
+# Screen and X11 window title
+screentitle() {
+   echo -ne "\033k${*}\033\\"
+}
+xtitle() {
+   echo -ne "\033]0;${*}\007"
+}
+title() {
+	screentitle "${@}"
+	xtitle "${@}"
+}
+
+if [ "$SSH_CONNECTION" ]; then
+	xtitle "$HOSTNAME"
+fi
+
 # TODO: Consider using tput setaf and tput sgr0 instead
 # https://github.com/lhunath/scripts/blob/master/bashlib/bashlib#L210
 if [ "${use_color}" = "true" ]; then
