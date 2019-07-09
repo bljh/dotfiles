@@ -12,17 +12,6 @@ cmdexists()
 # I want my ~/bin and various sbin dirs to be part of my PATH
 export PATH="${HOME}/bin:$HOME/.local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:${PATH}:/usr/X11R6/bin:/usr/X11R6/sbin"
 
-# To reduce disk spinups, and to increase privacy, store my bash history in /tmp
-#export HISTFILE="/tmp/.bash_history_$USER"
-# A bit of security to prevent other users from doing symlink attacks and such.
-# If the history file is not a regular file, or is not owned by me, delete it
-# and create a new with sensible permissions
-#if ! [ -f "$HISTFILE" ] || [ "$UID" != "$(stat -t "$HISTFILE"|cut -d' ' -f5)" ];
-#then
-#	rm -f "$HISTFILE"
-#	touch "$HISTFILE"
-#	chmod 600 "$HISTFILE"
-#fi
 # Don't log commands that begin with space, and also don't log repeated commands
 export HISTCONTROL="ignoreboth"
 
@@ -85,18 +74,8 @@ if cmdexists lynx; then
 	export WWW_HOME="https://www.startpage.com/"
 fi
 
-cmdexists yagtd && alias todo='yagtd -c ~/todo.txt'
-
 # I want pass (password manager) to use the primary clipboard
 export PASSWORD_STORE_X_SELECTION=primary
-
-# When using mosh, don't let mosh alter the title
-export MOSH_TITLE_NOPREFIX=y
-
-# If minicom is available, setup my preferred parameters
-if cmdexists minicom; then
-	export MINICOM="-c on -o"
-fi
 
 # Enable bash completion
 if [ -n "$BASH_COMPLETION" ] && [ -f /etc/bash_completion ] && ! shopt -oq posix; then
@@ -108,18 +87,6 @@ umask 0022
 
 # Automatically cd into directories when entered  as commands
 shopt -s autocd
-
-# Powerline bling
-# https://www.youtube.com/watch?v=_D6RkmgShvU
-#if cmdexists powerline-daemon; then
-#	export TERM="xterm-256color"
-#	powerline-daemon -q
-#	POWERLINE_BASH_CONTINUATION=1
-#	POWERLINE_BASH_SELECT=1
-#	if [ -f /usr/share/powerline/bindings/bash/powerline.sh ]; then
-#		. /usr/share/powerline/bindings/bash/powerline.sh
-#	fi
-#fi
 
 # Liquidprompt bling
 test -e /usr/share/liquidprompt/liquidprompt && . /usr/share/liquidprompt/liquidprompt

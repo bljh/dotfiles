@@ -114,25 +114,12 @@ initialZoom: width
 ! revealed to on-lookers. This hopefully fixes the problem:
 SshAskpass*grabKeyboard: False
 
-! Attenpt to disable the mouse while locked. Some bug reports mention that the
-! max is 100px
-xscreensaver.pointerHysteresis: 2000
-
-! ratmenu
-! Look in /etc/X11/rgb.txt for supported color names
-ratmenu*fgcolor:  white
-ratmenu*bgcolor:  black
-! Look in /etc/X11/fonts/*/*.alias for possible fonts */
-!ratmenu*font:     -dosemu-vga-medium-r-normal--20-200-75-75-c-100-ibm-cp866
-!ratmenu*font:     vga
-! Possible values: snazzy, dreary
-ratmenu*style:    dreary
-! Possible values: true, false
-!ratmenu*persist:  false
-! Possible values: left, center, right
-!ratmenu*align:    right
-
 ! xvkbd - Virtual on-screen keyboard for touch screens etc
 xvkbd.keypad: false
 xvkbd.customization: -norwegian
 xvkbd.compact: true
+
+rofi.bc: #000000
+rofi.terminal: urxvt
+rofi.monitor: -1
+rofi.ssh-client: mosh

@@ -16,7 +16,7 @@ if [ -n "${BASH_VERSION}" ] ; then
 	fi
 fi
 
-#This file is sourced by bash when you log in interactively.
+# This file is sourced by bash when you log in interactively.
 [ -f ~/.bashrc ] && . ~/.bashrc
 
 
@@ -24,14 +24,6 @@ fi
 cmdexists()
 {
 	type "${@}" 1>/dev/null 2>&1
-}
-
-# Screen and X11 window title
-title() {
-	echo -ne "\033k${title}\033\\"
-}
-xtitle() {
-	echo -ne "\033]0;${*}\007"
 }
 
 # TODO: Consider using tput setaf and tput sgr0 instead
@@ -74,11 +66,6 @@ else
 	COL_RESET=""
 fi
 
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-	debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 # If we are working in a virtual console...
 if [ "${TERM}" = "linux" ]; then
 	# Change the beep frequency and length
@@ -100,61 +87,6 @@ if [ -d "${HOME}/.gnupg" ] && cmdexists gpg-agent; then
 	if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
 		export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
 	fi
-
-	# If an ssh-agent is already present, preserve it and use it
-	#if [ -n "$SSH_AUTH_SOCK" ]; then
-	#	mySSH_AUTH_SOCK="$SSH_AUTH_SOCK"
-	#	if [ -n "$SSH_AGENT_PID" ]; then
-	#		mySSH_AGENT_PID="$SSH_AGENT_PID"
-	#	fi
-	#fi
-	#unset mySSH_AUTH_SOCK mySSH_AGENT_PID
-	## Try to take over an existing gpg-agent
-	#if [ -f "${HOME}/.gnupg/gpg-agent-info-$HOSTNAME" ]; then
-	#	. "${HOME}/.gnupg/gpg-agent-info-$HOSTNAME"
-	#elif [ -f "${HOME}/.gnupg/.gpg-agent-info" ]; then
-	#	. "${HOME}/.gnupg/.gpg-agent-info"
-	#fi
-	#export GPG_AGENT_INFO
-	#export SSH_AUTH_SOCK
-	#export SSH_AGENT_PID
-	## If taking over an existing session failed, start a new session.
-	## The format of GPG_AGENT_INFO seems to be "socket:agentpid:1". Don't know what
-	## the "1" at the end means.
-	#if [ ! -S "${GPG_AGENT_INFO%%:*:*}" ]; then
-	#	# If no gpg-agent is running, start one
-	#	rm -f "$HOME/.gnupg/gpg-agent-info" "$HOME/.gnupg/gpg-agent-info-$HOSTNAME"
-	#	if [ ! -S "$SSH_AUTH_SOCK" ]; then
-	#		eval $(gpg-agent -s --daemon --enable-ssh-support --default-cache-ttl 7200)
-	#	else
-	#		eval $(gpg-agent -s --daemon -default-cache-ttl 7200)
-	#	fi
-	#fi
-	## Is SSH_AUTH_SOCK was already set before this script was loaded, restore it
-	#if [ -n "$mySSH_AUTH_SOCK" ] ; then
-	#	export SSH_AUTH_SOCK="$mySSH_AUTH_SOCK"
-	#	if [ -n "$mySSH_AGENT_PID" ]; then
-	#		export SSH_AGENT_PID="$mySSH_AGENT_PID"
-	#	else
-	#		unset SSH_AGENT_PID
-	#	fi
-	#	unset mySSH_AUTH_SOCK mySSH_AGENT_PID
-	#fi
-fi
-
-# ssh-agent, for managing my ssh keys
-if [ ! -S "$SSH_AUTH_SOCK" ] && cmdexists netstat && cmdexists ssh-agent; then
-	# Attempt to take over an existing ssh-agent
-	for SSH_AUTH_SOCK in /tmp/ssh-*/agent.*; do
-		if [ -O "$SSH_AUTH_SOCK" ] && [ -S "$SSH_AUTH_SOCK" ] && [ -w "$SSH_AUTH_SOCK" ] && [ -r "$SSH_AUTH_SOCK" ]; then
-			break
-		fi
-		unset SSH_AUTH_SOCK
-	done
-	# If taking over an existing session failed, start a new session
-	if [ ! -S "$SSH_AUTH_SOCK" ] && cmdexists ssh-agent; then
-		eval $(ssh-agent -s -t 7200|grep -v '^echo')
-	fi
 fi
 
 # Use afuse and sshfs for auto mounting remote directories under ~/net
@@ -163,26 +95,16 @@ if cmdexists afuse; then
 	afuse -o mount_template='sshfs -oreconnect -oServerAliveInterval=15 -oServerAliveCountMax=3 -oControlMaster=no -oPasswordAuthentication=no -oConnectTimeout=3 -oIdentityFile=~/.ssh/sshfs.key %r: %m' -o unmount_template='fusermount -u -z %m' ~/net
 	fi
 fi
-if cmdexists gphotofs && [ -d ~/mnt/gphotofs ] && ! mountpoint -q ~/mnt/gphotofs; then
-	gphotofs ~/mnt/gphotofs
-fi
 
-# If screen is available, configured, and we're not inside a screen session,
-# then use screen as login shell
-#if [ "$SHLVL" = 1 ] && [ "$TERM" != "screen" ] && cmdexists screen && test -e "$HOME/.screenrc"; then
-#	((SHLVL+=1)); export SHLVL
-#	screen -xRl
-#	echo "screen login shell exited with status: $?"
-#fi
-
-##uncomment the following to activate bash-completion:
+# Bash completion
 [ -f /etc/profile.d/bash-completion ] && source /etc/profile.d/bash-completion
 
+# If an ecryptfs dir is present but locked, notify the user who might want a hint to unlock it
 if [ -d "$HOME/.Private" ] && [ -e "$HOME/.ecryptfs/Private.mnt" ] && cmdexists ecryptfs-mount-private && ! mountpoint -q "$(cat "$HOME/.ecryptfs/Private.mnt")"; then
 	echo "Note: ecryptfs is locked. Use ecryptfs-mount-private to unlock"
 fi
 
-# Allow quick switching between qwerty and dvorak
+# A few shorthands for switching between US dvorak and Danish qwerty
 if [ "$DISPLAY" ]; then
 	asdf() { setxkbmap -layout "dvorak" -variant 'us' -option 'ctrl:nocaps'; }
 	aoei() { setxkbmap -layout "dk" -variant 'nodeadkeys' -option 'ctrl:nocaps'; }
