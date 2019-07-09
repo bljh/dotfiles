@@ -71,6 +71,8 @@ fi
 if [ -x "$HOME/bin/yoga-disable-ts-on-pen-proximity.sh" ] && cmdexists xinput && xinput|grep 'Wacom ISDv4 EC Pen stylus'; then
 	"$HOME/bin/yoga-disable-ts-on-pen-proximity.sh" &
 	BGPIDS="$BGPIDS $!"
+	# Set calibration props for the built-in tablet. Parameters from xinput_calibrator
+	xinput --set-prop 'Wacom ISDv4 EC Pen stylus' 'Wacom Tablet Area' 0 40 27706 15519
 fi
 
 # Finally, the window manager

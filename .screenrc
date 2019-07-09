@@ -8,7 +8,7 @@ utf8 on on
 # Yeah, yeah, I've read it a thousand times already
 startup_message off
 # My computer has more memory than my brain, might as well use it
-defscrollback 1000
+defscrollback 3000
 
 # The shell should be started as a "login" shell
 #shell -$SHELL
