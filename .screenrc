@@ -7,7 +7,7 @@ defutf8 on
 utf8 on on
 # Yeah, yeah, I've read it a thousand times already
 startup_message off
-# My computer has more memory than my brain, might as well use it
+# My computer has more backscroll memory than my brain, might as well use it
 defscrollback 3000
 
 # The shell should be started as a "login" shell
@@ -37,21 +37,7 @@ bindkey "^[[5;2~" eval "copy" "stuff ^u"
 bindkey -m "^[[5;2~" stuff ^u
 bindkey -m "^[[6;2~" stuff ^d
 
-
-# Some "backticks" to show me useful information in the caption bar at the
-# bottom of my screen.
-#
-# These will obviously require external scripts. If they are not present, env
-# and the redirections will make sure not to cause undesired terminal noise.
-# battime.sh should output battery time left, if applicable
-backtick 1 30 30 sh -c "acpi -b|grep -v '100%$'|cut -d: -f2-|cut -d, -f 2,3|cut -d' ' -f2-"
-#backtick 2 30 30 env netqueue-count -q 2>/dev/null
-# Caption example (current window will be bold): (Grey text on blue background,
-# current window is bold and white) (In split screen, the inactive part will
-# have black foreground)
-# [11:44:08] 0-$ mutt  1$* irssi  2$ slrn       [batt: 02:05] hostname
-#caption always "%?%F%{= bw}%:%{= bk}%?[%c:%s] %-Lw%{+b}%10L>%n%f* %t%{-b}%+Lw%=%? %{= rk}[net-Q: %2`]%{= bw}%?%? [batt: %1`]%?%H%{dd}"
-caption always "%?%F%{= bw}%:%{= bk}%?[%c:%s] %-Lw%{+b}%10L>%n%f* %t%{-b}%+Lw%=%? [batt: %1`]%?%H%{dd}"
+caption always "%?%F%{= bw}%:%{= bk}%?[%c:%s] %-Lw%{+b}%10L>%n%f* %t%{-b}%+Lw%=%H%{dd}"
 
 # Standout rendition, including vertical bar, is bold green on black background
 rendition so "=b kg"

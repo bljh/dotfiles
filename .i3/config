@@ -35,8 +35,6 @@ bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
 bindsym $mod+d exec rofi -show run
-# Use rofi to start ssh connections. Note, $mod+s is usually mapped to stacking mode, but I never use that anyway
-bindsym $mod+s exec rofi -show ssh
 
 # Move focus across windows
 bindsym $mod+Left focus left
@@ -64,7 +62,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
-#bindsym $mod+s layout stacking
+bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -80,7 +78,7 @@ bindsym $mod+space focus mode_toggle
 # focus the child container
 #bindsym $mod+d focus child
 
-set $workspace1 "1: Comms"
+set $workspace1 "1: Chat"
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
