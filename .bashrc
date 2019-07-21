@@ -89,4 +89,7 @@ umask 0022
 shopt -s autocd
 
 # Liquidprompt bling
+LP_BATTERY_THRESHOLD=10
+LP_HOSTNAME_ALWAYS=1
+LP_USER_ALWAYS=0
 test -e /usr/share/liquidprompt/liquidprompt && . /usr/share/liquidprompt/liquidprompt
