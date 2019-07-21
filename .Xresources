@@ -15,8 +15,8 @@ URxvt.colorAttrMode: on
 URxvt.urgentOnBell: true
 
 URxvt.perl-ext-common: background,font-size
-URxvt.font-size.step: 4
-URxvt.background.expr: rootalign shade -0.7, root
+URxvt.font-size.step: 2
+URxvt.background.expr: rootalign shade -0.8, root
 
 !! Colors
 URxvt.foreground: green
