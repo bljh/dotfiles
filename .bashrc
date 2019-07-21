@@ -60,12 +60,12 @@ fi
 alias netstat='netstat --wide'
 alias ip='ip -human -color -oneline -brief'
 
-# Use git for config files. To apply to a new system:
-# alias config='/usr/bin/git --git-dir=$HOME/.configrepo/ --work-tree=$HOME'
+# Use git for config files
+alias config='/usr/bin/git --git-dir="$HOME/.configrepo/" --work-tree="$HOME"'
+# To apply to a new system, add the alias above and run:
+# git clone --bare https://github.com/ttytyper/dotfiles.git "$HOME/.configrepo"
 # config config --local status.showUntrackedFiles no
-# git clone --bare <git-repo-url> $HOME/.configrepo
-# config checkout
-alias config='/usr/bin/git --git-dir=$HOME/.configrepo/ --work-tree=$HOME'
+# config checkout # Will tell you if you need to move any pre-existing files out of the way. Use --force to delete all of them
 
 if cmdexists lynx; then
 	# I hate those stupid delays in lynx
