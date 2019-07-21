@@ -10,9 +10,6 @@ urxvt.foreground: green
 *VT100.foreground: green
 urxvt.background: black
 *VT100.background: black
-urxvt.transparent: true
-urxvt.shading: 8
-urxvt.blurRadius: 0
 urxvt.loginShell: true
 *VT100.loginShell: true
 urxvt.scrollBar: false
@@ -28,6 +25,11 @@ urxvt.colorAttrMode: on
 URxvt.urgentOnBell: true
 *VT100.urgentOnBell: true
 XTerm*bellIsUrgent:  true
+
+URxvt.perl-ext-common: background,font-size
+URxvt.font-size.step: 4
+URxvt.background.expr: rootalign shade -0.7, root
+
 ! }}}
 ! HiDPI and font related settings {{{
 ! http://vincent.jousse.org/tech/archlinux-retina-hidpi-macbookpro-xmonad/
