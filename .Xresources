@@ -74,6 +74,6 @@ Xft.dpi:       96
 ! }}}
 
 rofi.bc: #000000
-rofi.terminal: URxvt
+rofi.terminal: urxvt
 rofi.monitor: -1
 rofi.ssh-client: mosh
