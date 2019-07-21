@@ -73,18 +73,6 @@ Xft.dpi:       96
 !Xft.dpi:       192
 ! }}}
 
-*inputMethod: kinput2
-
-! Sometimes, with my auto-ssh-askpass.sh, ssh-askpass will seemingly grab the
-! keyboard before xscreensaver, causing the contents of the screen to be
-! revealed to on-lookers. This hopefully fixes the problem:
-SshAskpass*grabKeyboard: False
-
-! xvkbd - Virtual on-screen keyboard for touch screens etc
-xvkbd.keypad: false
-xvkbd.customization: -norwegian
-xvkbd.compact: true
-
 rofi.bc: #000000
 rofi.terminal: urxvt
 rofi.monitor: -1
