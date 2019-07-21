@@ -6,8 +6,6 @@
 !URxvt.boldFont: xft:DejaVu Sans Mono:bold:size=12:antialias=true
 URxvt.font:     xft:Hack:regular:size=10:antialias=true
 URxvt.boldFont: xft:Hack:bold:size=10:antialias=true
-urxvt.foreground: green
-urxvt.background: black
 urxvt.loginShell: true
 urxvt.scrollBar: false
 urxvt.colorMode: on
@@ -19,26 +17,10 @@ URxvt.urgentOnBell: true
 URxvt.perl-ext-common: background,font-size
 URxvt.font-size.step: 4
 URxvt.background.expr: rootalign shade -0.7, root
-! }}}
 
-! HiDPI and font related settings {{{
-! http://vincent.jousse.org/tech/archlinux-retina-hidpi-macbookpro-xmonad/
-! https://wiki.archlinux.org/index.php/HiDPI#X_Server
-Xft.antialias: true
-Xft.rgba:      rgb
-Xft.hinting:   true
-!Xft.autohint:  0
-!Xft.lcdfilter: lcddefault
-Xft.hintstyle: hintfull
-Xft.dpi:       96
-!Xft.dpi:       120
-!Xft.dpi:       144
-!Xft.dpi:       175
-!Xft.dpi:       168
-!Xft.dpi:       192
-! }}}
-
-! More info found in urxvt(1)
+!! Colors
+urxvt.foreground: green
+urxvt.background: black
 ! Black
 urxvt.color0: black
 ! Red
@@ -72,6 +54,24 @@ urxvt.color13: magenta
 urxvt.color14: cyan
 ! Bright white
 urxvt.color15: white
+! }}}
+
+! HiDPI and font related settings {{{
+! http://vincent.jousse.org/tech/archlinux-retina-hidpi-macbookpro-xmonad/
+! https://wiki.archlinux.org/index.php/HiDPI#X_Server
+Xft.antialias: true
+Xft.rgba:      rgb
+Xft.hinting:   true
+!Xft.autohint:  0
+!Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.dpi:       96
+!Xft.dpi:       120
+!Xft.dpi:       144
+!Xft.dpi:       175
+!Xft.dpi:       168
+!Xft.dpi:       192
+! }}}
 
 *inputMethod: kinput2
 
