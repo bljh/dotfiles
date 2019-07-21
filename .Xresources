@@ -1,17 +1,17 @@
 ! Various terminal settings {{{
-! https://unix.stackexchange.com/questions/81746/how-can-i-get-better-looking-fonts-in-my-terminal-urxvt
+! https://unix.stackexchange.com/questions/81746/how-can-i-get-better-looking-fonts-in-my-terminal-URxvt
 !URxvt.font:     xft:bitstream vera sans mono:size=8:antialias=true
 !URxvt.boldFont: xft:bitstream vera sans mono:bold:size=8:antialias=true
 !URxvt.font:     xft:DejaVu Sans Mono:size=12:antialias=true
 !URxvt.boldFont: xft:DejaVu Sans Mono:bold:size=12:antialias=true
 URxvt.font:     xft:Hack:regular:size=10:antialias=true
 URxvt.boldFont: xft:Hack:bold:size=10:antialias=true
-urxvt.loginShell: true
-urxvt.scrollBar: false
-urxvt.colorMode: on
-urxvt.boldColors: on
-urxvt.dynamicColors: on
-urxvt.colorAttrMode: on
+URxvt.loginShell: true
+URxvt.scrollBar: false
+URxvt.colorMode: on
+URxvt.boldColors: on
+URxvt.dynamicColors: on
+URxvt.colorAttrMode: on
 URxvt.urgentOnBell: true
 
 URxvt.perl-ext-common: background,font-size
@@ -19,41 +19,41 @@ URxvt.font-size.step: 4
 URxvt.background.expr: rootalign shade -0.7, root
 
 !! Colors
-urxvt.foreground: green
-urxvt.background: black
+URxvt.foreground: green
+URxvt.background: black
 ! Black
-urxvt.color0: black
+URxvt.color0: black
 ! Red
-urxvt.color1: red3
+URxvt.color1: red3
 ! Green
-urxvt.color2: green3
+URxvt.color2: green3
 ! Yellow
-urxvt.color3: yellow3
+URxvt.color3: yellow3
 !!Blue
-urxvt.color4: rgb:4c/4c/ff
+URxvt.color4: rgb:4c/4c/ff
 ! Magenta
-urxvt.color5: magenta3
+URxvt.color5: magenta3
 ! Cyan
-urxvt.color6: cyan3
+URxvt.color6: cyan3
 ! White
-urxvt.color7: gray90
+URxvt.color7: gray90
 ! Bright black?
-urxvt.color8: gray50
+URxvt.color8: gray50
 ! Bright red
-urxvt.color9: red
+URxvt.color9: red
 ! Bright green
-urxvt.color10: green
+URxvt.color10: green
 ! Bright yellow
-urxvt.color11: yellow
+URxvt.color11: yellow
 *VT100.color11: yellow
 ! Bright blue
-urxvt.color12: rgb:5c/5c/ff
+URxvt.color12: rgb:5c/5c/ff
 ! Bright magenta
-urxvt.color13: magenta
+URxvt.color13: magenta
 ! Bright cyan
-urxvt.color14: cyan
+URxvt.color14: cyan
 ! Bright white
-urxvt.color15: white
+URxvt.color15: white
 ! }}}
 
 ! HiDPI and font related settings {{{
@@ -74,6 +74,6 @@ Xft.dpi:       96
 ! }}}
 
 rofi.bc: #000000
-rofi.terminal: urxvt
+rofi.terminal: URxvt
 rofi.monitor: -1
 rofi.ssh-client: mosh
