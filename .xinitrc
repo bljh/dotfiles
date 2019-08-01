@@ -26,6 +26,9 @@ fi
 # Set the cursor to be the watch, to indicate that we're working
 xsetroot -cursor_name watch
 
+# A simple black background, unless anything overrides it
+xsetroot -solid black
+
 # Move cache and such to RAM medium
 if cmdexists unburden-home-dir; then
 	unburden-home-dir > /dev/null
@@ -53,9 +56,6 @@ if cmdexists synclient; then
 	#	syndaemon -i 0.5 -d
 	#fi
 fi
-
-# A simple black background, unless anything overrides it
-xsetroot -solid black
 
 # Seems that the default java toolkit doesn't like ratpoison. The menu bar
 # doesn't show up in programs like josm and yaac. This var fixes it:
