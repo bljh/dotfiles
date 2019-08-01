@@ -78,9 +78,12 @@ bindsym $mod+space focus mode_toggle
 # focus the child container
 #bindsym $mod+d focus child
 
-set $workspace1 "1: Chat"
-set $workspace2 "2: www"
-set $workspace3 "3: Nerd"
+# Chat, email
+set $workspace1 "1: "
+# Web, firefox
+set $workspace2 "2: "
+# Terminals
+set $workspace3 "3: "
 
 # switch to workspace
 bindsym $mod+1 workspace $workspace1
