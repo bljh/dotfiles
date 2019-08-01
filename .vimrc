@@ -30,6 +30,7 @@ set ai                  " Always set auto-indenting on
 set viminfo=            " Do not keep a viminfo file
 set ruler               " Show the cursor position all the time
 set relativenumber      " Relative line numbering
+set number              " Also show current line number along with relativenumber
 
 " When auto-completing files, do it a way similar to bash (show a list of all
 " matching names
