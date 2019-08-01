@@ -34,7 +34,7 @@ URxvt.color3: yellow3
 !!Blue
 URxvt.color4: rgb:4c/4c/ff
 ! Magenta
-URxvt.color5: magenta3
+URxvt.color5: magenta
 ! Cyan
 URxvt.color6: cyan3
 ! White
