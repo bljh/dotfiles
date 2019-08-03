@@ -56,6 +56,7 @@ else
 	alias lla="ls -lAh"
 	alias l1="ls -1h"
 fi
+alias l="ll"
 
 alias netstat='netstat --wide'
 alias ip='ip -human -color -oneline -brief'
