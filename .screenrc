@@ -38,6 +38,10 @@ bindkey -m "^[[5;2~" stuff ^u
 bindkey -m "^[[6;2~" stuff ^d
 
 caption always "%?%F%{= bw}%:%{= bk}%?[%c:%s] %-Lw%{+b}%10L>%n%f* %t%{-b}%+Lw%=%H%{dd}"
+# Highlight window titles that want attention with brigh red
+rendition bell br
+rendition monitor br
+rendition silence br
 
 # Standout rendition, including vertical bar, is bold green on black background
 rendition so "=b kg"
