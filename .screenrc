@@ -46,3 +46,9 @@ rendition so "=b kg"
 # allows you to quickly open it in your browser. I've tried to make it fairly
 # secure, but it is still vulnerable to symlink attacks
 bind ^B eval "hardcopy_append off" "hardcopy /tmp/.screen-urlview-$USER" "screen -t urlview sh -c 'chmod 600 /tmp/.screen-urlview-$USER; urlview /tmp/.screen-urlview-$USER; rm -f /tmp/.screen-urlview-$USER'"
+
+# Enable 256 colors
+# http://robotsrule.us/vim/
+attrcolor b ".I"
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E38;5;%dm'
+defbce "on
