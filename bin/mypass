@@ -16,7 +16,7 @@ if [ $# -eq 1 ] && [ -e "${PASSWORD_STORE_DIR:-"$HOME/.password-store"}/$1.gpg" 
 		echo "$line"
 		# Open lines that start with "url: " in the default web browser
 		if [ "${line:0:5}" = "url: " ]; then
-			chromium --incognito "${line:5}" &
+			sensible-browser "${line:5}" &
 		fi
 	done
 	# Restore previous clipboard when we're done

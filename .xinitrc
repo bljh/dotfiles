@@ -63,6 +63,10 @@ export AWT_TOOLKIT=MToolkit
 # https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=508650
 export _JAVA_AWT_WM_NONREPARENTING=y
 
+if cmdexists qutebrowser; then
+	export BROWSER=qutebrowser
+fi
+
 # Disper handles multihead situations, with a hook to run feh for setting the background/wallpaper
 if cmdexists mydisper; then
 	mydisper
