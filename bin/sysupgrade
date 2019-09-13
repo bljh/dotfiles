@@ -38,9 +38,7 @@ done
 
 if cmdexists aptitude; then
 	aptitude_opts="-W"
-	# If cron-apt exists we assume that update is already performed on a
-	# regular basis
-	if [ "$update" = "y" ] && ! cmdexists cron-apt; then
+	if [ "$update" = "y" ]; then
 		aptitude update
 	fi
 	#aptitude $aptitude_opts autoclean
@@ -54,9 +52,7 @@ if cmdexists aptitude; then
 	dpkg --configure -a
 	aptitude $aptitude_opts clean
 elif cmdexists apt-get; then
-	# If cron-apt exists we assume that update is already performed on a
-	# regular basis
-	if [ "$update" = "y" ] && ! cmdexists cron-apt; then
+	if [ "$update" = "y" ]; then
 		apt-get update
 	fi
 	#apt-get autoclean
