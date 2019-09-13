@@ -66,6 +66,8 @@ elif cmdexists apt-get; then
 	#dpkg-query -f '${Package} ${Status}\n' -W|grep config-files|cut -d' ' -f1
 	# FIXME: Purge obsolete
 	apt-get clean
+elif cmdexists yum; then
+	yum update
 else
 	echo "Cannot find aptitude or apt-get on this system." >&2
 	exit 1
