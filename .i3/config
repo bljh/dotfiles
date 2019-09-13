@@ -162,6 +162,8 @@ workspace_layout tabbed
 focus_follows_mouse yes
 mouse_warping none
 
+for_window [title="Android Emulator - .*"] floating enable
+
 # pinentry window should float
 for_window [class="Pinentry"] floating enable
 
