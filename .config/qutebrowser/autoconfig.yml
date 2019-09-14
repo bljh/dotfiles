@@ -43,7 +43,11 @@ settings:
     - en-US
   tabs.last_close:
     global: startpage
+  tabs.title.format:
+    global: '{title}'
   url.default_page:
     global: about:blank
   url.start_pages:
     global: about:blank
+  window.title_format:
+    global: qutebrowser
