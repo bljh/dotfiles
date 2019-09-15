@@ -33,7 +33,7 @@ settings:
   hints.chars:
     global: abcdefghijklmnopqrstuvwxyz
   hints.mode:
-    global: word
+    global: letter
   qt.highdpi:
     global: true
   session.lazy_restore:
