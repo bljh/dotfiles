@@ -47,6 +47,10 @@ settings:
     global: '{title}'
   url.default_page:
     global: about:blank
+  url.searchengines:
+    global:
+      DEFAULT: https://duckduckgo.com/?q={}
+      google: https://www.google.com/search?q={}
   url.start_pages:
     global: about:blank
   window.title_format:
