@@ -89,8 +89,14 @@ umask 0022
 # Automatically cd into directories when entered  as commands
 shopt -s autocd
 
-# Liquidprompt bling
-LP_BATTERY_THRESHOLD=10
-LP_HOSTNAME_ALWAYS=1
-LP_USER_ALWAYS=0
-test -e /usr/share/liquidprompt/liquidprompt && . /usr/share/liquidprompt/liquidprompt
+# Liquidprompt bling. Only runs in interactive shells, not from scripts, scp etc.
+if [[ $- = *i* ]]; then
+	LP_BATTERY_THRESHOLD=10
+	LP_HOSTNAME_ALWAYS=1
+	LP_USER_ALWAYS=0
+	if [ -e "$HOME/.local/liquidprompt" ]; then
+		source "$HOME/.local/liquidprompt"
+	elif [ -e /usr/share/liquidprompt/liquidprompt ]; then
+		source /usr/share/liquidprompt/liquidprompt
+	fi
+fi
