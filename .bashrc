@@ -94,7 +94,7 @@ if [[ $- = *i* ]]; then
 	LP_BATTERY_THRESHOLD=10
 	LP_HOSTNAME_ALWAYS=1
 	LP_USER_ALWAYS=0
-	if [ -e "$HOME/.local/liquidprompt" ]; then
+	if [ -e "$HOME/.local/liquidprompt/liquidprompt" ]; then
 		source "$HOME/.local/liquidprompt"
 	elif [ -e /usr/share/liquidprompt/liquidprompt ]; then
 		source /usr/share/liquidprompt/liquidprompt
