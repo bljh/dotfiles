@@ -1,5 +1,12 @@
 # .bashrc:
 
+# Use git for managing config files
+alias config='/usr/bin/git --git-dir="$HOME/.configrepo/" --work-tree="$HOME"'
+# To apply to a new system, add the alias above and run:
+# git clone --bare https://github.com/ttytyper/dotfiles.git "$HOME/.configrepo"
+# config config --local status.showUntrackedFiles no
+# config checkout # Will tell you if you need to move any pre-existing files out of the way. Use --force to delete all of them
+
 # This file is sourced by all *interactive* bash shells on startup.  This
 # file *should generate no output* or it will break the scp and rcp commands.
 
@@ -60,13 +67,6 @@ alias l="ll"
 
 alias netstat='netstat --wide'
 alias ip='ip -human -color -oneline -brief'
-
-# Use git for config files
-alias config='/usr/bin/git --git-dir="$HOME/.configrepo/" --work-tree="$HOME"'
-# To apply to a new system, add the alias above and run:
-# git clone --bare https://github.com/ttytyper/dotfiles.git "$HOME/.configrepo"
-# config config --local status.showUntrackedFiles no
-# config checkout # Will tell you if you need to move any pre-existing files out of the way. Use --force to delete all of them
 
 if cmdexists lynx; then
 	# I hate those stupid delays in lynx
