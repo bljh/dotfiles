@@ -190,3 +190,6 @@ c.window.title_format = 'qutebrowser'
 # setting, it's replaced with the fonts listed here.
 # Type: Font
 c.fonts.monospace = 'Hack, "xos4 Terminus", Terminus, Monospace, "DejaVu Sans Mono", Monaco, "Bitstream Vera Sans Mono", "Andale Mono", "Courier New", Courier, "Liberation Mono", monospace, Fixed, Consolas, Terminal'
+
+# Disable local storage in the hopes of throwing trackers off course
+c.content.local_storage = False
