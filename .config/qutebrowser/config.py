@@ -152,6 +152,9 @@ c.url.default_page = 'file://' + expanduser("~") + '/.config/qutebrowser/default
 #c.url.default_page = 'about:blank'
 c.colors.webpage.bg = '#222222'
 
+c.colors.tabs.selected.odd.bg = '#487597'
+c.colors.tabs.selected.even.bg = c.colors.tabs.selected.odd.bg
+
 # Format to use for the tab title. The following placeholders are
 # defined:  * `{perc}`: Percentage as a string like `[10%]`. *
 # `{perc_raw}`: Raw percentage, e.g. `10`. * `{title}`: Title of the
