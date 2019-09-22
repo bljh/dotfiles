@@ -150,7 +150,7 @@ c.hints.mode = 'letter'
 c.tabs.last_close = 'blank'
 c.url.default_page = 'file://' + expanduser("~") + '/.config/qutebrowser/default.html'
 #c.url.default_page = 'about:blank'
-c.colors.webpage.bg = '#222222'
+#c.colors.webpage.bg = '#222222'
 
 c.colors.tabs.selected.odd.bg = '#487597'
 c.colors.tabs.selected.even.bg = c.colors.tabs.selected.odd.bg
