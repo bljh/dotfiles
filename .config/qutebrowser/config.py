@@ -83,6 +83,8 @@ c.completion.cmd_history_max_items = 0
 #   - bottom
 c.downloads.position = 'bottom'
 
+c.statusbar.position = 'top'
+
 # Characters used for hint strings.
 # Type: UniqueCharString
 c.hints.chars = 'abcdefghijklmnopqrstuvwxyz'
