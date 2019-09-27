@@ -18,7 +18,7 @@ URxvt.perl-ext-common: background,font-size,matcher
 ! Matcher makes URLs clickable
 URxvt.matcher.button: 1
 URxvt.font-size.step: 1
-URxvt.background.expr: rootalign shade -0.8, root
+URxvt.background.expr: rootalign shade -0.85, root
 
 !! Colors
 URxvt.foreground: green
