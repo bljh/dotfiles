@@ -2,10 +2,10 @@
 ! https://unix.stackexchange.com/questions/81746/how-can-i-get-better-looking-fonts-in-my-terminal-URxvt
 !URxvt.font:     xft:bitstream vera sans mono:size=8:antialias=true
 !URxvt.boldFont: xft:bitstream vera sans mono:bold:size=8:antialias=true
-!URxvt.font:     xft:DejaVu Sans Mono:size=12:antialias=true
-!URxvt.boldFont: xft:DejaVu Sans Mono:bold:size=12:antialias=true
-URxvt.font:     xft:Hack:regular:size=10:antialias=true
-URxvt.boldFont: xft:Hack:bold:size=10:antialias=true
+URxvt.font:     xft:DejaVu Sans Mono:size=10:antialias=true
+URxvt.boldFont: xft:DejaVu Sans Mono:bold:size=10:antialias=true
+!URxvt.font:     xft:Hack:regular:size=10:antialias=true
+!URxvt.boldFont: xft:Hack:bold:size=10:antialias=true
 URxvt.loginShell: true
 URxvt.scrollBar: false
 URxvt.colorMode: on
