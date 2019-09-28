@@ -13,3 +13,6 @@
 [submodule ".vim/bundle/vim-openscad"]
 	path = .vim/bundle/vim-openscad
 	url = https://github.com/sirtaj/vim-openscad.git
+[submodule ".vim/bundle/darcula"]
+	path = .vim/bundle/darcula
+	url = https://github.com/blueshirts/darcula.git

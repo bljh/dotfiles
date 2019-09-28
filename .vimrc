@@ -77,6 +77,6 @@ endif
 filetype indent on
 
 set background=dark
-colorscheme torte
+colorscheme darcula
 " Don't fill the background
-hi Normal guibg=NONE ctermbg=NONE
+hi Normal ctermbg=NONE
