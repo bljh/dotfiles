@@ -52,8 +52,4 @@ rendition so "=b kg"
 bind ^B eval "hardcopy_append off" "hardcopy /tmp/.screen-urlview-$USER" "screen -t urlview sh -c 'chmod 600 /tmp/.screen-urlview-$USER; urlview /tmp/.screen-urlview-$USER; rm -f /tmp/.screen-urlview-$USER'"
 
 # Enable 256 colors
-# http://robotsrule.us/vim/
-attrcolor b ".I"
-defbce "on"
-# https://bbs.archlinux.org/viewtopic.php?id=50647
-terminfo rxvt* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+term screen-256color
