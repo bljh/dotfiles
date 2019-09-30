@@ -149,8 +149,11 @@ c.hints.mode = 'letter'
 
 # A few attempts at getting a blank dark startup and default page without any
 # flashing on reload
-c.tabs.last_close = 'blank'
+c.tabs.last_close = 'default-page'
 c.url.default_page = 'file://' + expanduser("~") + '/.config/qutebrowser/default.html'
+# Page(s) to open at the start.
+# Type: List of FuzzyUrl, or FuzzyUrl
+c.url.start_pages = c.url.default_page
 #c.url.default_page = 'about:blank'
 #c.colors.webpage.bg = '#222222'
 
@@ -181,10 +184,6 @@ c.tabs.title.format = '{title}'
 # `:open google qutebrowser`.
 # Type: Dict
 c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}', 'google': 'https://www.google.com/search?q={}'}
-
-# Page(s) to open at the start.
-# Type: List of FuzzyUrl, or FuzzyUrl
-c.url.start_pages = c.url.default_page
 
 # Format to use for the window title. The same placeholders like for
 # `tabs.title.format` are defined.
