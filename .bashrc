@@ -7,6 +7,7 @@ alias config='/usr/bin/git --git-dir="$HOME/.configrepo/" --work-tree="$HOME"'
 # git clone --bare https://github.com/ttytyper/dotfiles.git "$HOME/.configrepo"
 # config config --local status.showUntrackedFiles no
 # config checkout # Will tell you if you need to move any pre-existing files out of the way. Use --force to delete all of them
+# config submodule update --init --recursive
 
 # This file is sourced by all *interactive* bash shells on startup.  This
 # file *should generate no output* or it will break the scp and rcp commands.
