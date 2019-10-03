@@ -2,7 +2,7 @@
 
 # Use git for managing config files
 # Source of idea: https://www.atlassian.com/git/tutorials/dotfiles
-alias config='/usr/bin/git --git-dir="$HOME/.configrepo/" --work-tree="$HOME"'
+alias config='git --git-dir="$HOME/.configrepo/" --work-tree="$HOME"'
 # To apply to a new system, add the alias above and run:
 # git clone --bare https://github.com/ttytyper/dotfiles.git "$HOME/.configrepo"
 # config config --local status.showUntrackedFiles no
