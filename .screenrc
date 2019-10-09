@@ -1,6 +1,7 @@
 # ~/.screenrc
 # My configuration for GNU/screen
-#
+
+altscreen on
 
 # UTF-8 is neat
 defutf8 on
