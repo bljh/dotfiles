@@ -54,3 +54,14 @@ bind ^B eval "hardcopy_append off" "hardcopy /tmp/.screen-urlview-$USER" "screen
 
 # Enable 256 colors
 term screen-256color
+
+# The key bindings below might not be the same on all kinds of terminals. Use showkey -a to determine what code your terminal maps the keys to.
+# Use alt and the upper left keys to quicly navigate between windows
+bindkey "^[|" other # alt + |
+bindkey "^[q" prev # alt + q
+bindkey "^[w" next # alt + w
+# Bind F1-5 to jump between windows
+bindkey "^[OP" select 0
+bindkey "^[OQ" select 1
+bindkey "^[OR" select 2
+bindkey "^[OS" select 3
