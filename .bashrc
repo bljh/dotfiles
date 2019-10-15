@@ -70,11 +70,10 @@ alias l="ll"
 alias netstat='netstat --wide'
 alias ip='ip -human -color -oneline -brief'
 
+export BROWSER="chromium"
 if cmdexists lynx; then
 	# I hate those stupid delays in lynx
 	alias lynx="lynx -nopause"
-	# WWW home page, mostly (only?) used by lynx
-	export WWW_HOME="https://www.startpage.com/"
 fi
 
 # I want pass (password manager) to use the primary clipboard
