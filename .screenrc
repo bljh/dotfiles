@@ -1,13 +1,13 @@
 # ~/.screenrc
 # My configuration for GNU/screen
 
-altscreen on
-
 # UTF-8 is neat
 defutf8 on
 utf8 on on
+
 # Yeah, yeah, I've read it a thousand times already
 startup_message off
+
 # My computer has more backscroll memory than my brain, might as well use it
 defscrollback 3000
 
@@ -38,8 +38,11 @@ bindkey "^[[5;2~" eval "copy" "stuff ^u"
 bindkey -m "^[[5;2~" stuff ^u
 bindkey -m "^[[6;2~" stuff ^d
 
+# Status bar at the bottom. Example:
+# [19:26:04] 0$ bash  1$ bash  2-$ bash  3$* bash    laptop
 caption always "%?%F%{= bw}%:%{= bk}%?[%c:%s] %-Lw%{+b}%10L>%n%f* %t%{-b}%+Lw%=%H%{dd}"
-# Highlight window titles that want attention with brigh red
+
+# Highlight window titles that want attention with bright red
 rendition bell br
 rendition monitor br
 rendition silence br
@@ -47,20 +50,19 @@ rendition silence br
 # Standout rendition, including vertical bar, is bold green on black background
 rendition so "=b kg"
 
-# A "screen scraper" that shows you a list of all urls on the screen, and
-# allows you to quickly open it in your browser. I've tried to make it fairly
-# secure, but it is still vulnerable to symlink attacks
-bind ^B eval "hardcopy_append off" "hardcopy /tmp/.screen-urlview-$USER" "screen -t urlview sh -c 'chmod 600 /tmp/.screen-urlview-$USER; urlview /tmp/.screen-urlview-$USER; rm -f /tmp/.screen-urlview-$USER'"
-
 # Enable 256 colors
 term screen-256color
+altscreen on
 
-# The key bindings below might not be the same on all kinds of terminals. Use showkey -a to determine what code your terminal maps the keys to.
-# Use alt and the upper left keys to quicly navigate between windows
+# Shortcuts to window navigation
+# The key bindings below might not be the same on all kinds of terminals. Use
+# showkey -a to determine what code your terminal maps the keys to.
+# Use alt and the upper left keys to quicly switch back and forth
 bindkey "^[|" other # alt + |
 bindkey "^[q" prev # alt + q
 bindkey "^[w" next # alt + w
-# Bind F1-5 to jump between windows
+# Bind F1-5 to jump between windows. Works in Git for Windows. Doesn't seem to
+# work in urxvt, even though showkey shows the same codes.
 bindkey "^[OP" select 0
 bindkey "^[OQ" select 1
 bindkey "^[OR" select 2
