@@ -59,8 +59,9 @@ altscreen on
 # showkey -a to determine what code your terminal maps the keys to.
 # Use alt and the upper left keys to quicly switch back and forth
 bindkey "^[|" other # alt + |
-bindkey "^[q" prev # alt + q
-bindkey "^[w" next # alt + w
+bindkey "^[h" prev # alt + h
+bindkey "^[l" next # alt + l
+bindkey "^[^M" screen # alt + enter creates a new window
 
 # Bind F1-12 to jump between windows. Intentionally starting from one to
 # decrease mental mathness. Window 0 will just have to be accessed the old way
