@@ -70,7 +70,7 @@ alias l="ll"
 alias netstat='netstat --wide'
 alias ip='ip -human -color -oneline -brief'
 
-export BROWSER="chromium"
+export BROWSER="firefox"
 if cmdexists lynx; then
 	# I hate those stupid delays in lynx
 	alias lynx="lynx -nopause"
