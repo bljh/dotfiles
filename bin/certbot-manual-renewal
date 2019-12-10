@@ -1,0 +1,17 @@
+#!/bin/bash
+# This script makes it easier to manually refresh certs with cerbot, using DNS
+# challenge. Useful when you have servers that are not accessible from the
+# internet
+
+set -x
+
+# Privilege escalation if we're not root
+if [ "$(id -u)" != "0" ]; then
+	exec sudo "$0" "${@}"
+fi
+
+domains=( $(find "/etc/letsencrypt/live" -mindepth 1 -maxdepth 1 -type d -exec basename {} \;) )
+
+for domain in "${domains[@]}"; do
+	certbot certonly --manual --manual-public-ip-logging-ok --preferred-challenges dns -d "$domain"
+done
