@@ -68,6 +68,7 @@ elif cmdexists apt-get; then
 	apt-get clean
 elif cmdexists yum; then
 	yum update
+	needs-restarting
 else
 	echo "Cannot find aptitude or apt-get on this system." >&2
 	exit 1
