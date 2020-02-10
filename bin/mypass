@@ -1,7 +1,8 @@
 #!/bin/bash
 # Wrapper for pass (https://www.passwordstore.org/). Copies the first line
 # (password) to clipboard, opens urls (prefixed "url: ") in default browser,
-# and displas yanything other than the password (username etc)
+# and displays the remaining information in the password file, such as
+# username and other notes
 
 set -e
 set -u
@@ -13,18 +14,33 @@ if [ $# -eq 1 ] && [ -e "${PASSWORD_STORE_DIR:-"$HOME/.password-store"}/$1.gpg" 
 	secret="${lines[0]}"
 	unset lines[0]
 	for line in "${lines[@]}"; do
-		echo "$line"
 		# Open lines that start with "url: " in the default web browser
 		if [ "${line:0:5}" = "url: " ]; then
+			echo "$line"
 			sensible-browser "${line:5}" &
+		elif [ "${line:0:9}" = "oathtool " ]; then
+			: # We don't display oath secrets
+		else
+			echo "$line"
 		fi
 	done
 	# Restore previous clipboard when we're done
+	# FIXME: Don't restore if the user has put something else in the clipboard in the meantime
 	trap 'xclip < <(base64 -d <<< "$before")' EXIT
+
 	xclip <<< "$secret"
 	echo ""
-	read -n1 -p "Password clipped. Press any key to reset"
+	read -n1 -p "Password clipped. Press any key when you're done with it"
 	echo ""
+
+	for line in "${lines[@]}"; do
+		if [ "${line:0:9}" = "oathtool " ]; then
+			$line|xclip
+			echo ""
+			read -n1 -p "OATH challenge clipped. Press any key when you're done"
+			echo ""
+		fi
+	done
 else
 	# If any arguments were provided, hand over control to pass
 	exec pass "${@}"
