@@ -80,20 +80,13 @@ if [ -x "$HOME/bin/yoga-disable-ts-on-pen-proximity.sh" ] && cmdexists xinput &&
 fi
 
 # Finally, the window manager
-#if cmdexists evilwm; then
-#	evilwm -fn 10x20 -fg grey -fc grey  -bg black -term "$XTERM" & # -mask1 mod4 -app xterm -v 0 -app Iceweasel -v 1 -app Firefox -v 1 -app rdesktop -v 2 &
-#	WM="evilwm"
-#elif cmdexists ratpoison; then
 if cmdexists i3; then
 	i3 &
 	WM="i3"
-#elif cmdexists ratpoison; then
-#	ratpoison &
-#	WM="ratpoison"
-#else
-## .. or just a terminal if we dont have ratpoison :P
-#	"$XTERM" &
-#	WM="$XTERM"
+else
+# .. or just a terminal if we dont have i3
+	"$XTERM" &
+	WM="$XTERM"
 fi
 WMPID="$!"
 
