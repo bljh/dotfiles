@@ -2,12 +2,30 @@
 
 # Use git for managing config files
 # Source of idea: https://www.atlassian.com/git/tutorials/dotfiles
-alias config='git --git-dir="$HOME/.configrepo/" --work-tree="$HOME"'
+alias config='git --git-dir="$HOME/.dotfiles.git/" --work-tree="$HOME"'
 # To apply to a new system, add the alias above and run:
 # git clone --bare https://github.com/ttytyper/dotfiles.git "$HOME/.configrepo"
 # config config --local status.showUntrackedFiles no
 # config checkout # Will tell you if you need to move any pre-existing files out of the way. Use --force to delete all of them
 # config submodule update --init --recursive
+
+# Previously used "$HOME/.configrepo". Later switched to "$HOME/.dotfiles.git"
+# because it's more descriptive. This handles the transition. Will be removed
+# in future revisions
+dotfilesgittransision() {
+	if [ -d "$HOME/.configrepo" ] && [ ! -e "$HOME/.dotfiles.git" ]; then
+		echo "Transitioning from ~/.configrepo to ~/.dotfiles.git"
+		local -a submodules
+		mapfile -t submodules < <(git --git-dir="$HOME/.configrepo/" --work-tree="$HOME" submodule --quiet foreach 'echo "$path"')
+		local path
+		for path in "${submodules[@]}"; do
+			echo "Transitioning submodule '$path'"
+			echo "gitdir: $(realpath -m --relative-to="$HOME/$path" "$HOME/.dotfiles.git/modules/$path")" > "$HOME/$path/.git"
+		done
+		mv --backup -v "$HOME/.configrepo" "$HOME/.dotfiles.git"
+	fi
+}
+dotfilesgittransision
 
 # This file is sourced by all *interactive* bash shells on startup.  This
 # file *should generate no output* or it will break the scp and rcp commands.
