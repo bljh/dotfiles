@@ -58,12 +58,9 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
-" Enable mouse in all modes
-set mouse=a
-
-" Don't touch the X server clipboard
-"set clipboard=exclude:.*
-
+" Disable the use of mouse and don't even try connecting to the X server
+set mouse-=a
+set clipboard=exclude:.*
 
 " Enable plugin-provided filetype settings, but only if the ftplugin
 " directory exists (which it won't on livecds, for example).
